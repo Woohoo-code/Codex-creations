@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vision Modes · Video Analyzer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <p class="eyebrow">Smart Video Tools</p>
+        <h1>Video Analyzer</h1>
+        <p class="subtitle">
+          Choose a mode, upload a video, and get a clean visual breakdown.
+        </p>
+      </header>
+
+      <section class="card controls-card">
+        <div class="control-grid">
+          <div class="field full">
+            <label for="videoInput">Video input</label>
+            <input id="videoInput" type="file" accept="video/*" />
+          </div>
+
+          <div class="field">
+            <label for="modeSelect">Mode</label>
+            <select id="modeSelect">
+              <option value="scene">Scene breakdown</option>
+              <option value="lpr">License plate recognition</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="sampleCount">Frame samples</label>
+            <input id="sampleCount" type="number" min="4" max="80" value="14" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="analyzeBtn" class="btn-primary">Analyze Video</button>
+          <button id="downloadBtn" class="btn-secondary" disabled>Download JSON Report</button>
+          <span id="statusText" class="status-text">Waiting for a video…</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <video id="preview" controls playsinline></video>
+      </section>
+
+      <section class="card" id="resultsPanel" hidden>
+        <h2 id="resultsTitle">Results</h2>
+        <div id="summary" class="summary"></div>
+        <ul id="metrics" class="metrics"></ul>
+      </section>
+
+      <section class="card" id="platesPanel" hidden>
+        <h2>Detected Plates</h2>
+        <p class="panel-note">
+          Best effort detection. OCR quality depends on video resolution, motion blur, and lighting.
+        </p>
+        <div id="plates" class="frames-grid"></div>
+      </section>
+
+      <section class="card" id="framesPanel" hidden>
+        <h2>Sampled Frames</h2>
+        <div id="frames" class="frames-grid"></div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
